@@ -37,14 +37,15 @@ public class Booking implements Serializable {
 	private String bookinguid;
 
 	@Column(name = "bookingdate")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	//@Column(name = "bookingdate", columnDefinition = "DATE")
+	@DateTimeFormat (pattern = "yyyy-MM-dd")
 	private LocalDate bookingDate;
 
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "checkindate")
 	private Date checkInDate;
 
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "checkoutdate")
 	private Date checkOutDate;
 
@@ -60,7 +61,7 @@ public class Booking implements Serializable {
 	@Column(name = "price")
 	private double price;
 
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "cancelDate")
 	private Date cancelDate;
 

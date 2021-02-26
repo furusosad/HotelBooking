@@ -24,5 +24,10 @@ public class BookingService implements BookingServiceIF{
     public Booking save(Booking booking) {
         return bookingRepository.save(booking);
     }
+
+    @Override
+    public Booking findByUid(String bookinguid) {
+        return bookingRepository.findByUid(bookinguid);
+    }
     
 }

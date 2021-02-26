@@ -184,7 +184,7 @@
 /*  3.  Header Css
 /*----------------------------------------*/
 .header-section{
-  background: url(images/bg/b-1.jpg)no-repeat scroll center center;
+  background: url(/images/bg/b-1.jpg)no-repeat scroll center center;
   background-size: cover;
 }
 .header-section.height-vh{
@@ -1189,7 +1189,7 @@ h3.news-title {
 .newsletter-form input::-webkit-input-placeholder{ color:#fff; }
 .newsletter-form input::-webkit-input-placeholder { color:#fff; }
 .newsletter-form input::-moz-placeholder{ color:#fff; } /* firefox 19+ */
-.newsletter-form input:-ms-input-placeholder color:#fff; } /* ie */
+.newsletter-form input:-ms-input-placeholder{ color:#fff; } /* ie */
 .newsletter-form input:-moz-placeholder{ color:#fff; }
 .newsletter-form button {
   background: #fff none repeat scroll 0 0;

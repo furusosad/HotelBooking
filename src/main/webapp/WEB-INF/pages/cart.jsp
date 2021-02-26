@@ -259,18 +259,19 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="booking">
                                     <div class="booking-info-deatils">
-                                        <c:forEach var="item" items="${sessionScope.cart}">
+                                        <c:forEach var="item" items="${cart}">
                                         <div class="single-room-details fix">
                                             
                                             <div class="room-img">
-                                                <img src="images/room/roob-tab.jpg" alt="">
+                                                <img src="${pageContext.request.getContextPath()}/resources/images/room/room1.jpg" alt="">
                                             </div>
                                             <div class="single-room-details pl-50">
                                                 <h3 class="s_room_title">SINGLE Room</h3>
                                                 <div class="room_price">
                                                     <h4>Price</h4>
                                                     <h5>$${item.room.price} <span>/per night</span></h5>
-                                                    <h5> ${item.room.roomnumber}</h5>
+                                                    <h5>Room Number: ${item.room.roomnumber}</h5>
+                                                    <h5>Floor: ${item.room.floor}</h5>
                                                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</p>
                                                 </div>
                                             </div>
@@ -286,39 +287,16 @@
                                                 <form action="<c:url value="/checkout" />" method="get">
                                                     <div class="single-form-part">
                                                         <div class="date-to mb-20">
-                                                            <input class="date-picker" type="text" placeholder="arrive date" value="arrive date">
+                                                            <input type="text" placeholder="Total = ${total}" value="Total = ${total}">
                                                             <i class="mdi mdi-calendar-text"></i>
                                                         </div>
-                                                        <div class="select-option">
-                                                            <select>
-                                                                <option value="1" selected>Room</option>
-                                                                <option value="2">Room 2</option>
-                                                                <option value="3">Room 3</option>
-                                                            </select>
-                                                        </div>
+                                                        
                                                     </div>
                                                     <div class="single-form-part">
-                                                        <div class="date-to mb-20">
-                                                            <input type="text" class="date-picker" placeholder="Departure Date" value="Departure Date">
-                                                            <i class="mdi mdi-calendar-text"></i>
-                                                        </div>
-                                                        <div class="select-option">
-                                                            <select>
-                                                                <option value="1" selected>Children</option>
-                                                                <option value="2">Mael</option>
-                                                                <option value="3">lady</option>
-                                                            </select>
-                                                        </div>
+                                                        
                                                     </div>
 
                                                     <div class="single-form-part">
-                                                        <div class="select-option mb-20">
-                                                            <select>
-                                                                <option value="1" selected>Adult</option>
-                                                                <option value="2">Teen</option>
-                                                                <option value="3">Children</option>
-                                                            </select>
-                                                        </div>
                                                         <div class="submit-form">
                                                             <button type="submit">Check Availability</button>
                                                         </div>

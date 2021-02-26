@@ -5,6 +5,8 @@
  */
 package com.hotel.controller;
 
+import com.hotel.entity.CheckInDate;
+import com.hotel.entity.Item;
 import com.hotel.entity.Room;
 import com.hotel.service.RoomService;
 import java.text.DateFormat;
@@ -18,6 +20,7 @@ import javax.faces.bean.RequestScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -40,6 +43,10 @@ import org.springframework.web.context.annotation.SessionScope;
 public class RoomController {
     @Autowired
     RoomService roomService;
+    
+    @Autowired
+    @Qualifier("date")
+    private CheckInDate date;
     
     @GetMapping(value = "/listRooms")
     public String listRooms(HttpServletRequest request, Model theModel, ModelMap mm) {
@@ -64,8 +71,8 @@ public class RoomController {
             model.addAttribute("rooms", rooms);
             request.setAttribute("checkInDate", checkInDate);
             request.setAttribute("checkOutDate", checkOutDate);
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa" +checkInDate);
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa" +checkOutDate);
+            date.setCheckInDate(checkInDate);
+            date.setCheckOutDate(checkOutDate);
         }
         
         return "search";

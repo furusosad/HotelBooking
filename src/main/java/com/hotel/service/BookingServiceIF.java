@@ -15,4 +15,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface BookingServiceIF {
     public Booking save(Booking booking);
+    public Booking findByUid(String bookinguid);
 }

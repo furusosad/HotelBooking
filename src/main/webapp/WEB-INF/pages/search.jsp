@@ -70,7 +70,7 @@
                             <div class="row">
                                 <div class="col-md-2 col-sm-2 col-xs-12">
                                     <div class="logo mt-15">
-                                        <a href="index.html"><img src="images/logo/logo.png" alt=""></a>
+                                            <a href="home.html"><img src="${pageContext.request.getContextPath()}/resources/images/logo/logo.png" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-md-10 col-sm-10 hidden-xs">
@@ -95,25 +95,27 @@
                                         <div class="menu-list hidden-sm hidden-xs">
                                             <nav>
                                                 <ul>
-                                                    <li><a href="index.html">home</a></li>
-                                                    <li><a href="about-us.html">About</a></li>
-                                                    <li><a href="gallery.html">Gallery</a></li>
-                                                    <li><a href="#">pages<i class="fa fa-angle-down"></i></a>
-                                                        <ul class="dropdown_menu">
-                                                            <li><a href="404.html">404</a></li>
-															<li><a href="booking-information.html">Booking Information</a></li>
-															<li><a href="personal-information.html">Personal Information</a></li>
-															<li><a href="payment-information.html">Parment Information</a></li>
-															<li><a href="booking-done.html">Booking Done</a></li>
-															<li><a href="room-booking.html">Room booking</a></li>
-															<li><a href="news.html">News</a></li>
-															<li><a href="gallery.html">Gallery</a></li>
-															 <li><a href="staff.html">Staff</a></li>
-															<li><a href="our-room.html">Room</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="contact-us.html">Contact</a></li>
-                                                </ul>
+                                                        <li><a href="home">home</a></li>
+                                                        <li><a href="<c:url value="/listRooms" />">About</a></li>
+                                                        <li><a href="gallery.html">Gallery</a></li>
+                                                        <li><a href="#">pages<i class="fa fa-angle-down"></i></a>
+                                                            <ul class="dropdown_menu">
+                                                                <li><a href="404.html">404</a></li>
+                                                                <li><a href="booking-information.html">Booking Information</a></li>
+                                                                <li><a href="personal-information.html">Personal Information</a></li>
+                                                                <li><a href="payment-information.html">Parment Information</a></li>
+                                                                <li><a href="booking-done.html">Booking Done</a></li>
+                                                                <li><a href="room-booking.html">Room booking</a></li>
+                                                                <li><a href="news.html">News</a></li>
+                                                                <li><a href="gallery.html">Gallery</a></li>
+                                                                <li><a href="staff.html">Staff</a></li>
+                                                                <li><a href="our-room.html">Room</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a href="contact-us.html">Contact</a></li>
+                                                        <li><a href="<c:url value="/cart" />">Cart</a></li>
+                                                        <li><a href="<c:url value="/cancel-booking" />">Cancel Booking</a></li>
+                                                    </ul>
                                             </nav>
                                         </div>
                                         <div class="search-bar-icon">
@@ -126,34 +128,7 @@
                     </div>    
                 </div>
                  <!-- Mobile menu start -->
-                 <div class="mobile-menu-area hidden-lg hidden-md">
-                    <div class="container">
-                        <div class="col-md-12">
-                            <nav id="dropdown">
-                            <ul>
-                                <li><a href="index.html">home</a></li>
-                                <li><a href="about-us.html">About</a></li>
-                                <li><a href="gallery.html">Gallery</a></li>
-                                <li><a href="#">pages</a>
-                                    <ul>
-                                        <li><a href="404.html">404</a></li>
-                                        <li><a href="booking-information.html">Booking Information</a></li>
-                                        <li><a href="personal-information.html">Personal Information</a></li>
-                                        <li><a href="payment-information.html">Parment Information</a></li>
-                                        <li><a href="booking-done.html">Booking Done</a></li>
-                                        <li><a href="room-booking.html">Room booking</a></li>
-                                        <li><a href="news.html">News</a></li>
-                                        <li><a href="gallery.html">Gallery</a></li>
-                                        <li><a href="staff.html">Staff</a></li>
-                                        <li><a href="our-room.html">Room</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact-us.html">contact</a></li>
-                            </ul>
-                        </nav>
-                        </div>
-                    </div>
-                </div>
+                 
                 <!-- Mobile menu end -->
             </div>
             <!--Welcome secton-->
@@ -221,7 +196,7 @@
                                 <div class="col-md-4 col-sm-6 col-xs-12 col-sm-6 col-xs-12">
                                     <div class="single-room mb-80">
                                         <div class="room-img">
-                                            <a href="#"><img src="images/room/room1.jpg" alt=""></a>
+                                            <a href="#"><img src="${pageContext.request.getContextPath()}/resources/images/room/room1.jpg" alt=""></a>
                                         </div>
                                         <div class="room-desc">
                                             <div class="room-name">
@@ -234,7 +209,7 @@
                                                 <h6>${rooms.roomtype.roomtypeid}</h6>
                                             </div>
                                             <div class="room-book">
-                                                <a href="<c:url value="/buy/${rooms.roomid}" />">Book now</a>
+                                                <a id="${rooms.roomid}">Book now</a>
                                             </div>
                                         </div>
                                     </div>
@@ -429,5 +404,26 @@
     <script src="<c:url value="/resources/js/main.js" />"></script>
 
 </body>
+
+<script>
+    $(".room-book > a").click(function(){
+        console.log($(this).hide());
+        console.log($(this).attr("id"));
+        $.ajax({
+                // URL gửi data
+                url: window.location.origin + '/HotelManagement/cart/add/' + $(this).attr("id"),
+                // type phương thức gửi get POST DELETE PUT
+                type: 'GET',
+                success: function (result) {
+                    // hiển thị câu hỏi tiếp theo và thông baos
+                    console.log('save: ' + result);
+                },
+                // thất bại sẽ chạy cái này:check error
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+    });
+</script>
 
 </html>

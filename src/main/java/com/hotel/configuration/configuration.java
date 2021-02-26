@@ -5,6 +5,7 @@
  */
 package com.hotel.configuration;
 
+import com.hotel.entity.CheckInDate;
 import com.hotel.entity.Item;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,4 +24,9 @@ public class configuration {
         return new ArrayList<Item>();
     }
     
+    
+    @Bean (name = "date")
+    CheckInDate date(){
+        return new CheckInDate();
+    }
 }

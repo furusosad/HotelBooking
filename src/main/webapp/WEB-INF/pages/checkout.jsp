@@ -259,7 +259,7 @@
                                 <div role="tabpanel" class="tab-pane active" id="personal">
                                     <div class="personal-info-details">
                                         <div class="booking-info-inner">
-                                            <form action="<c:url value="/success" />" method="GET">
+                                            <form action="<c:url value="/checkoutsuccess" />" method="POST">
                                                 <div class="booking-form-list">
                                                     <div class="single-form-part">
                                                         <div class="name mb-15">
@@ -291,7 +291,7 @@
                                                         <div class="select-option">
                                                             <select name="promvalue">
                                                                 <c:forEach var="promotions" items="${promotions}">
-                                                                <option value="${promotions.promId}" selected>${promotions.code}</option>
+                                                                <option value="${promotions.value}" selected>${promotions.code}</option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
@@ -331,6 +331,12 @@
                                             </div>
                                            </form>
                                         </div>
+                                                <c:if test="${messenger != null}">
+                                <div class="error"><i><h4 style="color:red;">${messenger}</h4></i></div>
+                                        </c:if>
+                                        <c:if test="${messenger1 != null}">
+                                <div class="error"><i><h4 style="color:red;">${messenger1}</h4></i></div>
+                                        </c:if>
                                     </div>        
                                 </div>
                                
