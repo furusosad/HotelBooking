@@ -24,10 +24,11 @@ public interface RoomRepository extends CrudRepository<Room, Integer>{
     
     @Query(value = "select * from room where room_type_id = ?1 and roomid NOT IN (select roomid from bookingdetails as a "
             + " join booking as b on a.bookingid = b.bookingid"
-            + " where (checkindate  <= ?2 and checkoutdate >= ?3) "
-            + " or (checkindate  < ?2 and checkoutdate >= ?3) "
-            + " or (checkindate  >= ?2 and checkoutdate <= ?3)) order by room_number ASC", nativeQuery = true)
-    List<Room> searchAvailableRoom(int roomTypeId, String checkInDate, String checkOutDate);
+            + " where ((checkindate  <= CONCAT(?2,' 13:00:00') and checkoutdate >= CONCAT(?3,' 12:00:00')) "
+            + " or (checkindate  < CONCAT(?2,' 13:00:00') and checkoutdate >= CONCAT(?3,' 12:00:00')) "
+            + " or (checkindate  <= CONCAT(?2,' 13:00:00') and checkoutdate > CONCAT(?3,' 12:00:00')) "
+            + " or (checkindate  >= CONCAT(?2,' 13:00:00') and checkoutdate <= CONCAT(?3,' 12:00:00'))) and (status = 'SUCCESS')) order by room_number ASC", nativeQuery = true)
+    List<Room> searchAvailableRoom(int roomTypeId, Date checkInDate, Date checkOutDate);
     
    
 }

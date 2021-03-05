@@ -184,8 +184,11 @@
 /*  3.  Header Css
 /*----------------------------------------*/
 .header-section{
-  background: url(/images/bg/b-1.jpg)no-repeat scroll center center;
+  background: url(../images/bg/architecture-chair-contemporary-1001965.jpg)no-repeat scroll center center;
   background-size: cover;
+  width: 1920px;
+  height: 800px;
+
 }
 .header-section.height-vh{
   height: 100vh;

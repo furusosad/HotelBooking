@@ -192,11 +192,11 @@
                         <div class="our-room-list owl-pagination">
                             
                             <div class="single-room-sapce">
-                                <c:forEach var="rooms" items="${rooms}">
+                                <c:forEach var="room" items="${rooms}">
                                 <div class="col-md-4 col-sm-6 col-xs-12 col-sm-6 col-xs-12">
                                     <div class="single-room mb-80">
                                         <div class="room-img">
-                                            <a href="#"><img src="${pageContext.request.getContextPath()}/resources/images/room/room1.jpg" alt=""></a>
+                                            <a href="#"><img src="${pageContext.request.getContextPath()}/resources/images/room/${room.images[0].image}" alt=""></a>
                                         </div>
                                         <div class="room-desc">
                                             <div class="room-name">
@@ -204,12 +204,12 @@
                                             </div>
                                             <div class="room-rent">
                                                 <h5>€ 200 / <span>Night</span></h5>
-                                                <h6>${rooms.floor}</h6>
-                                                <h6>${rooms.roomnumber}</h6>
-                                                <h6>${rooms.roomtype.roomtypeid}</h6>
+                                                <h6>${room.floor}</h6>
+                                                <h6>${room.roomnumber}</h6>
+                                                <h6>${room.roomtype.roomtypeid}</h6>
                                             </div>
                                             <div class="room-book">
-                                                <a id="${rooms.roomid}">Book now</a>
+                                                <a id="${room.roomid}">Book now</a>
                                             </div>
                                         </div>
                                     </div>
@@ -217,8 +217,35 @@
                                 </c:forEach>
                             </div>
                             
+                            
                         </div>
+                        
                     </div>
+                    <div class="single-room-booking-form mt-60">
+                                            <div class="booking_form_inner">
+                                                <form action="<c:url value="/checkout" />" method="get">
+                                                    <div class="single-form-part" >
+                                                        <div class="select-option">
+                                                            <select>
+                                                                <option value="1" selected>Room</option>
+                                                                <option value="2">Room 2</option>
+                                                                <option value="3">Room 3</option>
+                                                            </select>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="single-form-part">
+                                                        
+                                                    </div>
+
+                                                    <div class="single-form-part">
+                                                        <div class="submit-form">
+                                                            <button type="submit">Search</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                 </div>
             </div>
         </div>

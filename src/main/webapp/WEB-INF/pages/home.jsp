@@ -118,7 +118,7 @@
                                             <div class="select-book  mb-30">
                                                 <select name="typeroomid" class="select-booking">
                                                     <c:forEach var="roomtypes" items="${roomtypes}">
-                                                        <option value="${roomtypes.roomtypeid}" selected>${roomtypes.typename}</option>
+                                                        <option value="${roomtypes.roomtypeid}" selected>${roomtypes.typename} (People: ${roomtypes.numberofpeopke}, Bed: ${roomtypes.numberofpeopke})</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>

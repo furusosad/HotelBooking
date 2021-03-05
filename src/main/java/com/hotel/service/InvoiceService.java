@@ -24,5 +24,10 @@ public class InvoiceService implements InvoiceServiceIF{
     public Invoice save(Invoice invoice) {
         return invoiceRepository.save(invoice);
     }
+
+    @Override
+    public Invoice findInvoiceByBookingId(int bookingid) {
+        return invoiceRepository.findInvoiceByBookingId(bookingid);
+    }
     
 }

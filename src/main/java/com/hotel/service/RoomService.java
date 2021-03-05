@@ -29,7 +29,7 @@ public class RoomService implements RoomServiceIF{
 
 
     @Override
-    public List<Room> searchAvailableRoom(int roomTypeId, String checkInDate, String checkOutDate) {
+    public List<Room> searchAvailableRoom(int roomTypeId, Date checkInDate, Date checkOutDate) {
         return roomRepository.searchAvailableRoom(roomTypeId, checkInDate, checkOutDate);
     }
 

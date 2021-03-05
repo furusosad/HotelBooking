@@ -25,5 +25,10 @@ public class PromotionService implements  PromotionServiceIF{
     public List<Promotion> searchAllPromotionWithTime(String formattedString) {
         return promotionRepository.searchAllPromotionWithTime(formattedString);
     }
+
+    @Override
+    public Promotion searchPromotionWithId(int promid) {
+        return promotionRepository.searchPromotionById(promid);
+    }
     
 }

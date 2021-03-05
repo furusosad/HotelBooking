@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -65,14 +66,17 @@ public class RoomController {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             Date a = dateFormat.parse(arrival.replaceAll("/", "-"));
             Date b = dateFormat.parse(depature.replaceAll("/", "-"));
-            String checkInDate = new SimpleDateFormat("yyyy-MM-dd").format(a);
-            String checkOutDate = new SimpleDateFormat("yyyy-MM-dd").format(b);
+            String checkIn = new SimpleDateFormat("yyyy-MM-dd").format(a);
+            String checkOut = new SimpleDateFormat("yyyy-MM-dd").format(b);
+            DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate = dateFormat2.parse(checkIn);
+            Date checkOutDate = dateFormat2.parse(checkOut);
             List<Room> rooms = roomService.searchAvailableRoom(typeroomid, checkInDate, checkOutDate);
             model.addAttribute("rooms", rooms);
             request.setAttribute("checkInDate", checkInDate);
             request.setAttribute("checkOutDate", checkOutDate);
-            date.setCheckInDate(checkInDate);
-            date.setCheckOutDate(checkOutDate);
+            date.setCheckInDate(checkIn);
+            date.setCheckOutDate(checkOut);
         }
         
         return "search";

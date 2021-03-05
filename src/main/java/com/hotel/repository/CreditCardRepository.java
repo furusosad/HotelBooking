@@ -19,4 +19,6 @@ import org.springframework.stereotype.Repository;
 public interface CreditCardRepository extends CrudRepository<CreditCard, Integer>{
     @Query(value = "select * from creditcard", nativeQuery = true)
     List<CreditCard> findAllCard();
+    @Query(value = "select * from creditcard where cardid=?1", nativeQuery = true)
+    CreditCard findByCardId(int id);
 }

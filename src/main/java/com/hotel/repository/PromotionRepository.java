@@ -21,4 +21,7 @@ public interface PromotionRepository extends CrudRepository<Promotion, Integer>{
     @Query(value = "select * from promotion where startdate <= ?1 and ?1 <= enddate", nativeQuery = true)
     List<Promotion> searchAllPromotionWithTime(String formattedString);
     
+    @Query(value = "select * from promotion where promid =?1", nativeQuery = true)
+    Promotion searchPromotionById(int promid);
+    
 }

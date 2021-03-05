@@ -16,5 +16,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface PromotionServiceIF {
     public List<Promotion> searchAllPromotionWithTime(String formattedString);
-    
+    Promotion searchPromotionWithId(int promid);
 }

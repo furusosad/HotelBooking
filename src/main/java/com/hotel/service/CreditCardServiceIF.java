@@ -16,4 +16,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CreditCardServiceIF {
     public List<CreditCard> findAllCard();
+    public CreditCard findByCartId(int id);
 }

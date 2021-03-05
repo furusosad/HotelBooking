@@ -25,5 +25,12 @@ public class CreditCardService implements CreditCardServiceIF{
     public List<CreditCard> findAllCard() {
         return creditCardRepository.findAllCard();
     }
+
+    @Override
+    public CreditCard findByCartId(int id) {
+        return creditCardRepository.findByCardId(id);
+    }
+
+
     
 }

@@ -28,6 +28,7 @@ public class BookingService implements BookingServiceIF{
     @Override
     public Booking findByUid(String bookinguid) {
         return bookingRepository.findByUid(bookinguid);
+    
     }
     
 }

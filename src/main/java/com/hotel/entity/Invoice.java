@@ -1,6 +1,7 @@
 package com.hotel.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,7 +27,8 @@ public class Invoice {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "invoicedate")
 	//@Column(name = "invoicedate", columnDefinition = "DATE")
-	private LocalDate invoiceDate;
+        @Temporal(TemporalType.DATE)
+	private Date invoiceDate;
 
 	@Column(name = "amount")
 	private double amount;
@@ -49,11 +53,11 @@ public class Invoice {
 		this.invoiceId = invoiceId;
 	}
 
-	public LocalDate getInvoiceDate() {
+	public Date getInvoiceDate() {
 		return invoiceDate;
 	}
 
-	public void setInvoiceDate(LocalDate invoiceDate) {
+	public void setInvoiceDate(Date invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 

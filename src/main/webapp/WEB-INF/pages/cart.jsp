@@ -98,16 +98,16 @@
 
     <div class="wrapper">
         <!--Header section start-->
-        <div class="header-section booking_done">
+        <div class="header-section about-us">
             <div class="bg-opacity"></div>
-          <div class="top-header sticky-header">
+            <div class="top-header sticky-header">
                 <div class="top-header-inner">
                     <div class="container">
                         <div class="mgea-full-width">
                             <div class="row">
                                 <div class="col-md-2 col-sm-2 col-xs-12">
                                     <div class="logo mt-15">
-                                        <a href="index.html"><img src="images/logo/logo.png" alt=""></a>
+                                            <a href="home.html"><img src="${pageContext.request.getContextPath()}/resources/images/logo/logo.png" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-md-10 col-sm-10 hidden-xs">
@@ -132,25 +132,27 @@
                                         <div class="menu-list hidden-sm hidden-xs">
                                             <nav>
                                                 <ul>
-                                                    <li><a href="index.html">home</a></li>
-                                                    <li><a href="about-us.html">About</a></li>
-                                                    <li><a href="gallery.html">Gallery</a></li>
-                                                    <li><a href="#">pages<i class="fa fa-angle-down"></i></a>
-                                                        <ul class="dropdown_menu">
-                                                            <li><a href="404.html">404</a></li>
-															<li><a href="booking-information.html">Booking Information</a></li>
-															<li><a href="personal-information.html">Personal Information</a></li>
-															<li><a href="payment-information.html">Parment Information</a></li>
-															<li><a href="booking-done.html">Booking Done</a></li>
-															<li><a href="room-booking.html">Room booking</a></li>
-															<li><a href="news.html">News</a></li>
-															<li><a href="gallery.html">Gallery</a></li>
-															 <li><a href="staff.html">Staff</a></li>
-															<li><a href="our-room.html">Room</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="contact-us.html">Contact</a></li>
-                                                </ul>
+                                                        <li><a href="home">home</a></li>
+                                                        <li><a href="<c:url value="/listRooms" />">About</a></li>
+                                                        <li><a href="gallery.html">Gallery</a></li>
+                                                        <li><a href="#">pages<i class="fa fa-angle-down"></i></a>
+                                                            <ul class="dropdown_menu">
+                                                                <li><a href="404.html">404</a></li>
+                                                                <li><a href="booking-information.html">Booking Information</a></li>
+                                                                <li><a href="personal-information.html">Personal Information</a></li>
+                                                                <li><a href="payment-information.html">Parment Information</a></li>
+                                                                <li><a href="booking-done.html">Booking Done</a></li>
+                                                                <li><a href="room-booking.html">Room booking</a></li>
+                                                                <li><a href="news.html">News</a></li>
+                                                                <li><a href="gallery.html">Gallery</a></li>
+                                                                <li><a href="staff.html">Staff</a></li>
+                                                                <li><a href="our-room.html">Room</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a href="contact-us.html">Contact</a></li>
+                                                        <li><a href="<c:url value="/cart" />">Cart</a></li>
+                                                        <li><a href="<c:url value="/cancel-booking" />">Cancel Booking</a></li>
+                                                    </ul>
                                             </nav>
                                         </div>
                                         <div class="search-bar-icon">
@@ -163,48 +165,21 @@
                     </div>    
                 </div>
                  <!-- Mobile menu start -->
-                 <div class="mobile-menu-area hidden-lg hidden-md">
-                    <div class="container">
-                        <div class="col-md-12">
-                            <nav id="dropdown">
-                            <ul>
-                                <li><a href="index.html">home</a></li>
-                                <li><a href="about-us.html">About</a></li>
-                                <li><a href="gallery.html">Gallery</a></li>
-                                <li><a href="#">pages</a>
-                                    <ul>
-                                        <li><a href="404.html">404</a></li>
-                                        <li><a href="booking-information.html">Booking Information</a></li>
-                                        <li><a href="personal-information.html">Personal Information</a></li>
-                                        <li><a href="payment-information.html">Parment Information</a></li>
-                                        <li><a href="booking-done.html">Booking Done</a></li>
-                                        <li><a href="room-booking.html">Room booking</a></li>
-                                        <li><a href="news.html">News</a></li>
-                                        <li><a href="gallery.html">Gallery</a></li>
-                                        <li><a href="staff.html">Staff</a></li>
-                                        <li><a href="our-room.html">Room</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact-us.html">contact</a></li>
-                            </ul>
-                        </nav>
-                        </div>
-                    </div>
-                </div>
+                 
                 <!-- Mobile menu end -->
             </div>
             <!--Welcome secton-->
-            <div class="welcome-section text-center ptb-110">
+           <div class="welcome-section text-center ptb-110">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="breadcurbs-inner">
                                 <div class="breadcrubs">
-                                    <h2>Booking</h2>
+                                    <h2>Rooms</h2>
                                     <div class="breadcrubs-menu">
                                         <ul>
-                                            <li><a href="#">Home<i class="mdi mdi-chevron-right"></i></a></li>
-                                            <li>Booking</li>
+                                            <li><a href="home.html">Home<i class="mdi mdi-chevron-right"></i></a></li>
+                                            <li>Cart</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -213,7 +188,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!--Header section end-->
         <!-- search bar Start -->
@@ -263,7 +237,7 @@
                                         <div class="single-room-details fix">
                                             
                                             <div class="room-img">
-                                                <img src="${pageContext.request.getContextPath()}/resources/images/room/room1.jpg" alt="">
+                                                <a href="#"><img src="${pageContext.request.getContextPath()}/resources/images/room/${room.images[0].image}" alt=""></a>
                                             </div>
                                             <div class="single-room-details pl-50">
                                                 <h3 class="s_room_title">SINGLE Room</h3>
@@ -288,7 +262,6 @@
                                                     <div class="single-form-part">
                                                         <div class="date-to mb-20">
                                                             <input type="text" placeholder="Total = ${total}" value="Total = ${total}">
-                                                            <i class="mdi mdi-calendar-text"></i>
                                                         </div>
                                                         
                                                     </div>
@@ -298,7 +271,7 @@
 
                                                     <div class="single-form-part">
                                                         <div class="submit-form">
-                                                            <button type="submit">Check Availability</button>
+                                                            <button type="submit">CheckOut</button>
                                                         </div>
                                                     </div>
                                                 </form>

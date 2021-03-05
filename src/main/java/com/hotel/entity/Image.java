@@ -19,7 +19,7 @@ public class Image {
 	@Column(name = "image")
 	private String image;
 	@Column(name = "feature")
-	private int feature;
+	private Integer feature;
 	@ManyToOne
 	@JoinColumn(name="roomid")
 	private Room room;
@@ -27,7 +27,7 @@ public class Image {
     public Image() {
     }
 
-    public Image(int id, String image, int feature, Room room) {
+    public Image(int id, String image, Integer feature, Room room) {
         this.id = id;
         this.image = image;
         this.feature = feature;
@@ -50,11 +50,11 @@ public class Image {
         this.image = image;
     }
 
-    public int getFeature() {
+    public Integer getFeature() {
         return feature;
     }
 
-    public void setFeature(int feature) {
+    public void setFeature(Integer feature) {
         this.feature = feature;
     }
 

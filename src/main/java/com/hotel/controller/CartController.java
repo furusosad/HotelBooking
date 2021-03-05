@@ -9,6 +9,7 @@ import com.hotel.entity.Booking;
 import com.hotel.entity.BookingDetails;
 import com.hotel.entity.CheckInDate;
 import com.hotel.entity.CreditCard;
+import com.hotel.entity.CustomerInfor;
 import com.hotel.entity.Invoice;
 import com.hotel.entity.Item;
 import com.hotel.entity.Promotion;
@@ -27,6 +28,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -39,7 +42,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,7 +92,7 @@ public class CartController {
 
     @Autowired
     private EmailService emailService;
-    
+
     @RequestMapping(value = {"/cart"}, method = RequestMethod.GET)
     public String index(ModelMap modelMap, Model theModel) {
         int countItems = 0;
@@ -136,8 +142,8 @@ public class CartController {
     @RequestMapping(value = "/checkoutsuccess", method = RequestMethod.POST)
     public String checkout(@RequestParam(value = "error", required = false) String error, @RequestParam("cardnumber") int cardnumber, @RequestParam("cardname") String cardname, @RequestParam("cardmonth") int cardmonth,
             @RequestParam("cardyear") int cardyear, @RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("phonenumber") String phonenumber,
-            @RequestParam("promvalue") int promvalue, @RequestParam("note") String note,
-            HttpServletRequest request, ModelMap modelMap, ModelAndView modelAndView, Model theModel) throws ParseException {
+            @RequestParam("promId") int promId, @RequestParam("note") String note,
+            HttpServletRequest request, ModelMap modelMap, ModelAndView modelAndView, Model theModel) throws ParseException, MessagingException {
 
         String inDate = date.getCheckInDate();
         String outDate = date.getCheckOutDate();
@@ -145,7 +151,6 @@ public class CartController {
         Date in = dateFormat.parse(inDate);
         Date out = dateFormat.parse(outDate);
         LocalDate localDate = LocalDate.now();
-
 
         int countItems = 0;
         int total = 0;
@@ -157,6 +162,8 @@ public class CartController {
             }
         }
 
+        int promvalue = promotionService.searchPromotionWithId(promId).getValue();
+        
         int total2 = 0;
         if (promvalue == 0) {
             total2 = total;
@@ -180,21 +187,22 @@ public class CartController {
         if (card == null) {
             messenger = "Information not correct!!!";
         } else if (card.getBalance() >= total) {
+            String bookingCode = bookingUID();
             double newMoney = card.getBalance() - total2;
 
             card.setBalance(newMoney);
 
-            LocalDate now = LocalDate.now();
-
+            //LocalDate now = LocalDate.now();
             Booking booking = new Booking();
             booking.setPrice(total2);
-            booking.setBookingDate(now);
+            booking.setBookingDate(new Date());
             booking.setStatus(Status.SUCCESS);
             booking.setNumberOfRooms(countItems);
             booking.setNote(note);
             booking.setCheckInDate(in);
             booking.setCheckOutDate(out);
-            booking.setBookinguid(bookingUID());
+            booking.setBookinguid(bookingCode);
+            booking.setPromotion(promotionService.searchPromotionWithId(promId));
             booking = bookingService.save(booking);
 
             List<Item> cart = (List<Item>) this.cart;
@@ -205,19 +213,21 @@ public class CartController {
                 bookingDetails.setRoomtype(item.getRoom().getRoomtype());
                 bookingDetailsService.save(bookingDetails);
             }
-           
+
             Invoice invoice = new Invoice();
             invoice.setAmount(total);
             invoice.setBooking(booking);
             invoice.setCreditcard(card);
+            invoice.setInvoiceDate(new Date());
             invoiceService.save(invoice);
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(email);
             mailMessage.setSubject("Complete Checkout!");
             mailMessage.setFrom("furushuriya3@gmail.com");
-            mailMessage.setText("Thank you Mr/Mrs " + name  + " for your booking room at our hotel\n"
-                    + "And we will call to your phone(" + bookingUID() + ") to check" + "\n"
-                    + "We hope you will support us more in the future" + "\n"
+            mailMessage.setText("Thank you Mr/Mrs " + name + " for your booking room at our hotel\n"
+                    + "This is your(" + bookingCode + ") if you want to cancel your booking" + "\n"
+                    + "Connect this link: http://localhost:8080/HotelManagement/cancel-booking" + "\n"
+                    + "If you cancel, we will hold your 20% total money of your booking." + "\n"
                     + "Thank you very much!!");
             emailService.sendEmail(mailMessage);
             check = true;
@@ -230,19 +240,29 @@ public class CartController {
         } else {
             theModel.addAttribute("messenger", messenger);
             theModel.addAttribute("messenger1", messenger1);
-            theModel.getAttribute("promotions");
+            LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+        String formattedString = date.format(formatter);
+        List<Promotion> promotions = promotionService.searchAllPromotionWithTime(formattedString);
+        theModel.addAttribute("promotions", promotions);
             return "checkout";
         }
     }
 
     private String bookingUID() {
- 
-    int length = 5;
-    boolean useLetters = true;
-    boolean useNumbers = true;
-    String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
-    System.out.println(generatedString);
+
+        int length = 10;
+        boolean useLetters = true;
+        boolean useNumbers = true;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+        System.out.println(generatedString);
         return generatedString;
-}
+    }
+
+    @PostMapping("/saveCustomer")
+	public String saveCustomer(@ModelAttribute("customerinfo") CustomerInfor theCustomer, Model model) {
+            model.addAttribute("customer", theCustomer);
+		return "success";
+	}
     
 }

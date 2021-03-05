@@ -17,6 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface RoomServiceIF {
     public List<Room> getAllRoom();
-    public List<Room> searchAvailableRoom(int roomTypeId, String checkInDate, String checkOutDate);
+    public List<Room> searchAvailableRoom(int roomTypeId, Date checkInDate, Date checkOutDate);
     public Room findRoomId(int id);
 }
